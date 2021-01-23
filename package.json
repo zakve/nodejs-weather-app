@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/zakve/nodejs-weather-app#readme",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "postman-request": "^2.88.1-postman.28"
   }
 }
