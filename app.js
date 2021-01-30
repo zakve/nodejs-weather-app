@@ -5,11 +5,23 @@ const weatherURL = `http://api.weatherstack.com/current?access_key=${process.env
 const geocodeURL = `https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=${process.env.MAPBOX_KEY}`
 
 request({url: weatherURL, json: true}, (error, response) => {
-    console.log(response.body.current)
+    if (error) {
+        console.log('Unable to connect to weather service!')
+    } else if (response.body.error) {
+        console.log('Unable to find location')
+    } else {
+        console.log(response.body.current)
+    }
 })
 
 request({url: geocodeURL, json: true}, (error, response) => {
-    const latitude = response.body?.features[0]?.center[0]
-    const longitude = response.body?.features[0]?.center[1]
-    console.log(latitude, longitude)
+    if (error) {
+        console.log('Unable to connect to location service!')
+    } else if (response.body.features.length === 0) {
+        console.log('Unable to find location')
+    } else {
+        const latitude = response.body?.features[0]?.center[0]
+        const longitude = response.body?.features[0]?.center[1]
+        console.log(latitude, longitude)
+    }
 })
