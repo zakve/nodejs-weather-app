@@ -6,10 +6,6 @@ const publicDirectoryPath = path.join(__dirname, '../public')
 
 app.use(express.static(publicDirectoryPath))
 
-app.get("/about", (req, res) => {
-    res.send("About page")
-})
-
 app.get("/weather", (req, res) => {
     res.send({
         forecast: "It is shining",
