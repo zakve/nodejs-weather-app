@@ -7,9 +7,15 @@ const publicDirectoryPath = path.join(__dirname, '../public')
 app.use(express.static(publicDirectoryPath))
 
 app.get("/weather", (req, res) => {
+    if (!req.query.address) {
+        return res.send({
+            error: 'Address param is mandatory'
+        })
+    }
     res.send({
         forecast: "It is shining",
-        temperature: "22.3 °C"
+        temperature: "22.3 °C",
+        address: req.query.address
     })
 })
 
